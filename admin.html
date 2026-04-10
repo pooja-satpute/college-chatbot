@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+```
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        background: #0f172a;
+        color: white;
+    }
+
+    .sidebar {
+        width: 220px;
+        height: 100vh;
+        position: fixed;
+        background: #1e293b;
+        padding: 20px;
+    }
+
+    .sidebar h3 {
+        color: #38bdf8;
+    }
+
+    .sidebar a {
+        display: block;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+        margin: 5px 0;
+        border-radius: 6px;
+    }
+
+    .sidebar a:hover {
+        background: #334155;
+    }
+
+    .main {
+        margin-left: 240px;
+        padding: 20px;
+    }
+
+    .card {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        color: white;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+    <h3>🎓 Admin</h3>
+    <a href="#faq">FAQ</a>
+    <a href="#courses">Courses</a>
+    <a href="#scholarships">Scholarships</a>
+    <a href="/logout" class="text-danger">Logout</a>
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+```
+<h2>Dashboard</h2>
+
+<!-- FAQ SECTION -->
+<div id="faq" class="card">
+    <h4>FAQ Management</h4>
+
+    <form action="/add" method="POST" class="row g-2 mb-3">
+        <div class="col-md-5">
+            <input class="form-control" name="question" placeholder="Question">
+        </div>
+        <div class="col-md-5">
+            <input class="form-control" name="answer" placeholder="Answer">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Add</button>
+        </div>
+    </form>
+
+    <table class="table table-dark table-striped">
+        <tr>
+            <th>ID</th><th>Question</th><th>Answer</th><th>Action</th>
+        </tr>
+
+        {% for row in faq %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>
+                <a href="/edit/{{row[0]}}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/delete/{{row[0]}}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- COURSES SECTION -->
+<div id="courses" class="card">
+    <h4>Courses</h4>
+
+    <form action="/add_course" method="POST" class="row g-2 mb-3">
+        <input class="form-control col" name="name" placeholder="Course Name">
+        <input class="form-control col" name="eligibility" placeholder="Eligibility">
+        <input class="form-control col" name="fees" placeholder="Fees">
+        <input class="form-control col" name="duration" placeholder="Duration">
+        <button class="btn btn-success">Add</button>
+    </form>
+
+    <table class="table table-dark table-striped">
+        <tr>
+            <th>Name</th><th>Eligibility</th><th>Fees</th><th>Duration</th><th>Action</th>
+        </tr>
+
+        {% for c in courses %}
+        <tr>
+            <td>{{c[1]}}</td>
+            <td>{{c[2]}}</td>
+            <td>{{c[3]}}</td>
+            <td>{{c[4]}}</td>
+            <td>
+                <a href="/edit_course/{{c[0]}}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/delete_course/{{c[0]}}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- SCHOLARSHIPS SECTION -->
+<div id="scholarships" class="card">
+    <h4>Scholarships</h4>
+
+    <form action="/add_scholarship" method="POST" class="row g-2 mb-3">
+        <input class="form-control col" name="name" placeholder="Name">
+        <input class="form-control col" name="details" placeholder="Details">
+        <button class="btn btn-info">Add</button>
+    </form>
+
+    <table class="table table-dark table-striped">
+        <tr>
+            <th>Name</th><th>Details</th><th>Action</th>
+        </tr>
+
+        {% for s in scholarships %}
+        <tr>
+            <td>{{s[1]}}</td>
+            <td>{{s[2]}}</td>
+            <td>
+                <a href="/edit_scholarship/{{s[0]}}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/delete_scholarship/{{s[0]}}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+```
+
+</div>
+
+</body>
+</html>
