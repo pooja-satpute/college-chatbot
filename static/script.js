@@ -6,8 +6,11 @@ function sendMessage() {
 
     let chatBox = document.getElementById("chat-box");
 
-    // Show user message
-    chatBox.innerHTML += `<p><b>You:</b> ${message}</p>`;
+    // USER MESSAGE (blue bubble)
+    chatBox.innerHTML += `<div class="user-msg">${message}</div>`;
+
+    // Clear input
+    inputField.value = "";
 
     // Send to backend
     fetch('/chat', {
@@ -19,14 +22,13 @@ function sendMessage() {
     })
     .then(response => response.json())
     .then(data => {
-        chatBox.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+        // BOT MESSAGE (green bubble)
+        chatBox.innerHTML += `<div class="bot-msg">${data.reply}</div>`;
         chatBox.scrollTop = chatBox.scrollHeight;
     })
     .catch(error => {
-        chatBox.innerHTML += `<p style="color:red;">Error: Server not responding</p>`;
+        chatBox.innerHTML += `<div class="bot-msg" style="background:red;">Server Error</div>`;
     });
-
-    inputField.value = "";
 }
 
 // Press Enter to send
