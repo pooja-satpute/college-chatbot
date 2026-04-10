@@ -1,1 +1,5 @@
-
+body { background:#0f172a; color:white; font-family:Arial; }
+.chat-container { width:400px; margin:auto; margin-top:50px; background:#1e293b; padding:20px; border-radius:10px;}
+.message{padding:10px;margin:5px;border-radius:8px;}
+.user{background:#3b82f6;text-align:right;}
+.bot{background:#22c55e;}
